@@ -1,16 +1,24 @@
 package com.kbs.core.order;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.kbs.core.AppConfig;
 import com.kbs.core.member.Grade;
 import com.kbs.core.member.Member;
 import com.kbs.core.member.MemberService;
-import com.kbs.core.member.MemberServiceImpl;
 
 class OrderServiceTest {
 
-  MemberService memberService = new MemberServiceImpl();
-  OrderService orderService = new OrderServiceImpl();
+  MemberService memberService;
+  OrderService orderService;
+  
+  @BeforeEach
+  void beforeEach() {
+    AppConfig appConfig = new AppConfig();
+    memberService = appConfig.memberService();
+    orderService = appConfig.orderService();
+  }
   
   @Test
   void testCreateOrder() {
