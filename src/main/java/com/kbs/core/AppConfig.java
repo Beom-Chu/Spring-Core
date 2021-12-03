@@ -10,10 +10,18 @@ import com.kbs.core.order.OrderServiceImpl;
 public class AppConfig {
 
   public MemberService memberService() {
-    return new MemberServiceImpl(new MemoryMemberRepository());
+    return new MemberServiceImpl(memberRepository());
+  }
+
+  private MemoryMemberRepository memberRepository() {
+    return new MemoryMemberRepository();
   }
 
   public OrderService orderService() {
-    return new OrderServiceImpl(new MemoryMemberRepository(), new RateDiscountPolicy());
+    return new OrderServiceImpl(memberRepository(), discountPolicy());
+  }
+
+  private RateDiscountPolicy discountPolicy() {
+    return new RateDiscountPolicy();
   }
 }
