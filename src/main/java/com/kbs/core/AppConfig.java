@@ -1,5 +1,6 @@
 package com.kbs.core;
 
+import com.kbs.core.discount.FixDiscountPolicy;
 import com.kbs.core.discount.RateDiscountPolicy;
 import com.kbs.core.member.MemberService;
 import com.kbs.core.member.MemberServiceImpl;
@@ -22,6 +23,7 @@ public class AppConfig {
   }
 
   private RateDiscountPolicy discountPolicy() {
+//    return new FixDiscountPolicy();
     return new RateDiscountPolicy();
   }
 }
