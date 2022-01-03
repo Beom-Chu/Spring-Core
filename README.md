@@ -1,2 +1,2 @@
 # Spring-Core
-Spring Core 강좌 관련
+Spring Core 강좌 관련...
