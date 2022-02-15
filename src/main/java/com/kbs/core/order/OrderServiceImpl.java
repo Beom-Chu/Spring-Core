@@ -6,7 +6,10 @@ import com.kbs.core.discount.RateDiscountPolicy;
 import com.kbs.core.member.Member;
 import com.kbs.core.member.MemberRepository;
 import com.kbs.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService {
 
   //할인정책 변경 => 클라이언트 코드에 영향을 줌. OCP 위반.
@@ -16,6 +19,7 @@ public class OrderServiceImpl implements OrderService {
   private final MemberRepository memberRepository;
   private final DiscountPolicy discountPolicy;
 
+  @Autowired
   public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
     this.memberRepository = memberRepository;
     this.discountPolicy = discountPolicy;
