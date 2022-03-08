@@ -1,5 +1,6 @@
-package com.kbs.core;
+package com.kbs.core.scan;
 
+import com.kbs.core.AutoAppConfig;
 import com.kbs.core.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
