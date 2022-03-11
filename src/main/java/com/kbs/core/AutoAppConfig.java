@@ -11,8 +11,11 @@ import org.springframework.context.annotation.FilterType;
 @ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class))
 public class AutoAppConfig {
 
+    // 중복 빈 테스트를 위해 추가
+    /*
     @Bean(name = "memoryMemberRepository")
     public MemberRepository memberRepository(){
         return new MemoryMemberRepository();
     }
+     */
 }
