@@ -1,17 +1,13 @@
 package com.kbs.core.member;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
   private final MemberRepository memberRepository;
-
-  @Autowired
-  public MemberServiceImpl(MemberRepository memberRepository) {
-    this.memberRepository = memberRepository;
-  }
 
   @Override
   public void join(Member member) {
