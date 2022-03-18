@@ -27,7 +27,12 @@ public class BeanLifeCycleTest {
     @Configuration
     static class LifeCycleConfig {
 
-        @Bean(initMethod = "init", destroyMethod = "close")
+        /*
+        기본적으로 @PostConstruct, @PreDestroy 를 사용
+        수정 할 수 없는 외부 라이브러리를 초기화, 종료시 @Bean의 initMethod, destroyMethod 사용
+         */
+//        @Bean(initMethod = "init", destroyMethod = "close")
+        @Bean
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://hello-spring.dev");
