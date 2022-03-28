@@ -2,6 +2,7 @@ package com.kbs.core.scope;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -10,8 +11,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
-// 프로토 타입을 사용할 때 마다 스프링 컨테이너에 새로 요청하는 방법
+
 public class PrototypeProviderTest {
 
     @Test
@@ -28,6 +30,8 @@ public class PrototypeProviderTest {
 
     }
 
+    /*
+    // 프로토 타입을 사용할 때 마다 스프링 컨테이너에 새로 요청하는 방법
     @Component
     static class ClientBean {
 
@@ -36,6 +40,39 @@ public class PrototypeProviderTest {
 
         public int logic() {
             PrototypeBean prototypeBean = ac.getBean(PrototypeBean.class);
+            prototypeBean.addCount();
+            return prototypeBean.getCount();
+        }
+    }
+     */
+
+    /* ObjectProvider 를 사용하는 방법
+     스프링에 의존 , 별도의 라이브러리 필요 없음 */
+    /*
+    @Component
+    static class ClientBean {
+
+        @Autowired
+        private ObjectProvider<PrototypeBean> prototypeBeanObjectProvider;
+
+        public int logic() {
+            PrototypeBean prototypeBean = prototypeBeanObjectProvider.getObject();
+            prototypeBean.addCount();
+            return prototypeBean.getCount();
+        }
+    }
+     */
+
+    /* JSR-330 Provider 사용 방법
+     자바 표준이므로 스프링에 의존 X, 별도의 라이브러리 필요  */
+    @Component
+    static class ClientBean {
+
+        @Autowired
+        private Provider<PrototypeBean> prototypeBeanObjectProvider;
+
+        public int logic() {
+            PrototypeBean prototypeBean = prototypeBeanObjectProvider.get();
             prototypeBean.addCount();
             return prototypeBean.getCount();
         }
