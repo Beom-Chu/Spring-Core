@@ -1,6 +1,7 @@
 package com.kbs.core.common;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -8,7 +9,12 @@ import javax.annotation.PreDestroy;
 import java.util.UUID;
 
 @Component
-@Scope("request")
+//@Scope("request")
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS) // 가짜 프록시 클래스를 다른 빈에 미리 주입
+/*
+ * @Scope 의 proxyMode = ScopedProxyMode.TARGET_CLASS) 를 설정하면 스프링 컨테이너는 CGLIB
+ * 라는 바이트코드를 조작하는 라이브러리를 사용해서, MyLogger를 상속받은 가짜 프록시 객체를 생성한다
+ */
 public class MyLogger {
 
     private String uuid;
